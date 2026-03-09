@@ -4,7 +4,7 @@ A modern, interactive dashboard built with React, TypeScript, and Tailwind CSS, 
 
 ## 🚀 Live Demo
 
-[Add your hosted link here]
+**Deployed Link**: [Live Link](https://frontend-task-by-avm-solutions.vercel.app/)
 
 ## 📸 Screenshots
 
