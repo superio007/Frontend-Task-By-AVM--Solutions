@@ -31,7 +31,16 @@ const CarbonIntensityCard = () => {
   };
 
   return (
-    <div className="bg-linear-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col h-90 border border-white/8">
+    <div
+      style={{
+        background: `
+      linear-gradient(160deg, #010b0b 0%, #101b1d74 100%) padding-box,
+      linear-gradient(145deg, #11584fde 0%, #1725276f 60%) border-box
+    `,
+        border: "1px solid transparent",
+      }}
+      className="rounded-3xl p-5 flex flex-col h-90"
+    >
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
           <span className="bg-gray-700 rounded-[100%] p-1">

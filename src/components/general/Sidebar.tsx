@@ -15,9 +15,9 @@ const Sidebar = () => {
       style={{
         background: `linear-gradient(
           180deg, 
-          #ffffff14 0%, 
-          rgba(255, 255, 255, 0.02) 40%, 
-          rgba(0, 0, 0, 0.15) 100%
+          #2dd4be25 0%, 
+          #000000af 40%, 
+          #2dd4be25 100%
         )`,
       }}
       className="w-24 hidden md:flex flex-col justify-center items-center py-8 gap-10 shrink-0 

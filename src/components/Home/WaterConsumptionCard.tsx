@@ -4,7 +4,16 @@ import Humidicon from "../../assets/Humid.png";
 
 const WaterConsumptionCard = () => {
   return (
-    <div className="bg-linear-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col h-90 border border-white/8">
+    <div
+      style={{
+        background: `
+      linear-gradient(160deg, #010b0b 0%, #101b1d74 100%) padding-box,
+      linear-gradient(145deg, #4cb6a968 0%, #1725276f 60%) border-box
+    `,
+        border: "1px solid transparent",
+      }}
+      className="rounded-3xl p-5 flex flex-col h-90"
+    >
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
           <span className="bg-gray-700 rounded-[100%] py-1 px-1.5">
@@ -23,10 +32,10 @@ const WaterConsumptionCard = () => {
           <img src={Humidicon} alt="Dropicon" width={100} height={100} />
         </div>
         <div className="flex flex-col items-center gap-4">
-          <h2 className="text-5xl font-bold bg-[#1A4F49] rounded-full py-3 px-8 tracking-tight">
+          <h2 className="text-5xl font-normal bg-[#1A4F49] rounded-full py-3 px-8 tracking-tight">
             8.42m³
           </h2>
-          <div className="flex items-center gap-2 text-brand bg-[#0b2e2b]  px-3 py-2 rounded-full text-[#2DD4BF] font-semibold">
+          <div className="flex items-center gap-2 bg-[#0b2e2b] text-md px-3 py-2 rounded-full text-[#2DD4BF] font-normal">
             <ArrowDown size={18} />
             <span>1.2m³ less water used compare to last tuesday</span>
           </div>

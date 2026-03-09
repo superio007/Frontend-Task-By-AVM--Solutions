@@ -8,13 +8,14 @@ export default function MainLayout() {
       style={{
         overflowY: "hidden",
         scrollbarWidth: "none",
-        background: `radial-gradient(
-            circle at 20% 20%, 
-            rgba(20, 45, 45, 1) 0%, 
-            rgba(10, 15, 15, 1) 100%
+        background: `linear-gradient(
+          135deg, 
+          #163031 0%, 
+          #0C0D0F 40%, 
+          #192e29 100%
         )`,
       }}
-      className="h-screen overflow-hidden flex flex-col bg-linear-to-br from-[#030712] to-[#0d1117]"
+      className="h-screen overflow-hidden flex flex-col"
     >
       <Navbar />
       <div className="flex flex-1 overflow-hidden">
