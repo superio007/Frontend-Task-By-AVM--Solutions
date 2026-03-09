@@ -1,5 +1,5 @@
 import { Zap, MoreVertical } from "lucide-react";
-import { BarChart, Bar, ResponsiveContainer, Cell } from "recharts";
+import ReactECharts from "echarts-for-react";
 
 const EnergyConsumptionCard = () => {
   const data = [
@@ -11,6 +11,39 @@ const EnergyConsumptionCard = () => {
     { day: "S", value: 35, opacity: 0.4 },
     { day: "TODAY", value: 55, opacity: 1, isToday: true },
   ];
+
+  const option = {
+    grid: {
+      top: 10,
+      right: 10,
+      bottom: 30,
+      left: 10,
+    },
+    xAxis: {
+      type: "category",
+      data: data.map((item) => item.day),
+      axisLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: { show: false },
+    },
+    yAxis: {
+      type: "value",
+      show: false,
+    },
+    series: [
+      {
+        type: "bar",
+        data: data.map((item) => ({
+          value: item.value,
+          itemStyle: {
+            color: `rgba(45, 212, 191, ${item.opacity})`,
+            borderRadius: [4, 4, 0, 0],
+          },
+        })),
+        barWidth: "60%",
+      },
+    ],
+  };
 
   return (
     <div className="bg-gradient-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col h-90 border border-white/8">
@@ -31,21 +64,10 @@ const EnergyConsumptionCard = () => {
         </div>
       </div>
       <div className="flex-1 flex flex-col mt-2">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart
-            data={data}
-            margin={{ top: 0, right: 0, left: 0, bottom: 20 }}
-          >
-            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={`rgba(45, 212, 191, ${entry.opacity})`}
-                />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+        <ReactECharts
+          option={option}
+          style={{ width: "100%", height: "100%" }}
+        />
         <div className="flex justify-between px-1 text-[9px] font-bold -mt-4">
           {data.map((item, index) => (
             <span

@@ -1,5 +1,5 @@
 import { User } from "lucide-react";
-import { AreaChart, Area, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import ReactECharts from "echarts-for-react";
 
 const FootfallCard = () => {
   const data = [
@@ -11,6 +11,69 @@ const FootfallCard = () => {
     { day: "S", value: 120 },
     { day: "Today", value: 120 },
   ];
+
+  const option = {
+    grid: {
+      top: 20,
+      right: 20,
+      bottom: 10,
+      left: 10,
+    },
+    xAxis: {
+      type: "category",
+      data: data.map((item) => item.day),
+      boundaryGap: false,
+      axisLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: { show: false },
+    },
+    yAxis: {
+      type: "value",
+      min: 0,
+      max: 150,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "rgba(255, 255, 255, 0.05)",
+        },
+      },
+      axisLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: { show: false },
+    },
+    series: [
+      {
+        type: "line",
+        data: data.map((item) => item.value),
+        smooth: true,
+        lineStyle: {
+          color: "#2DD4BF",
+          width: 2.5,
+        },
+        areaStyle: {
+          color: {
+            type: "linear",
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [
+              { offset: 0, color: "rgba(45, 212, 191, 0.25)" },
+              { offset: 1, color: "rgba(45, 212, 191, 0)" },
+            ],
+          },
+        },
+        symbol: "none",
+        emphasis: {
+          itemStyle: {
+            color: "white",
+            borderColor: "#2DD4BF",
+            borderWidth: 2,
+          },
+        },
+      },
+    ],
+  };
 
   return (
     <div className="bg-linear-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col lg:col-span-2 h-90 border border-white/8">
@@ -32,59 +95,10 @@ const FootfallCard = () => {
         </div>
         <div className="ml-8 h-full flex flex-col">
           <div className="flex-1 relative">
-            {/* Grid lines */}
-            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
-              <div className="w-full h-px bg-white/5"></div>
-              <div className="w-full h-px bg-white/5"></div>
-              <div className="w-full h-px bg-white/5"></div>
-              <div className="w-full h-px bg-white/5"></div>
-            </div>
-            {/* Chart */}
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={data}
-                margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
-              >
-                <defs>
-                  <linearGradient
-                    id="chartGradient"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
-                    <stop offset="0%" stopColor="#2DD4BF" stopOpacity={0.25} />
-                    <stop offset="100%" stopColor="#2DD4BF" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis
-                  dataKey="day"
-                  axisLine={false}
-                  tickLine={false}
-                  tick={false}
-                />
-                <YAxis
-                  domain={[0, 150]}
-                  axisLine={false}
-                  tickLine={false}
-                  tick={false}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke="#2DD4BF"
-                  strokeWidth={2.5}
-                  fill="url(#chartGradient)"
-                  dot={false}
-                  activeDot={{
-                    r: 4,
-                    fill: "white",
-                    stroke: "#2DD4BF",
-                    strokeWidth: 2,
-                  }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+            <ReactECharts
+              option={option}
+              style={{ width: "100%", height: "100%" }}
+            />
           </div>
           <div className="flex justify-between pt-2 text-[9px] text-gray-500 font-bold uppercase tracking-widest px-1">
             {data.map((item, index) => (

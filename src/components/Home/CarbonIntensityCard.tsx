@@ -1,5 +1,5 @@
 import { Globe } from "lucide-react";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import ReactECharts from "echarts-for-react";
 
 const CarbonIntensityCard = () => {
   const data = [
@@ -9,6 +9,26 @@ const CarbonIntensityCard = () => {
     { name: "Wind", value: 15, color: "#22D3EE" },
     { name: "Solar", value: 15, color: "#2DD4BF" },
   ];
+
+  const option = {
+    series: [
+      {
+        type: "pie",
+        radius: ["54%", "74%"],
+        center: ["50%", "50%"],
+        startAngle: 90,
+        data: data.map((item) => ({
+          value: item.value,
+          name: item.name,
+          itemStyle: { color: item.color },
+        })),
+        label: { show: false },
+        emphasis: {
+          scale: false,
+        },
+      },
+    ],
+  };
 
   return (
     <div className="bg-linear-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col h-90 border border-white/8">
@@ -25,26 +45,11 @@ const CarbonIntensityCard = () => {
       </div>
       <div className="flex-1 flex items-center justify-center gap-4">
         <div className="relative w-40 h-40 flex items-center justify-center shrink-0">
-          <ResponsiveContainer width={160} height={160}>
-            <PieChart>
-              <Pie
-                data={data}
-                cx="50%"
-                cy="50%"
-                innerRadius={54}
-                outerRadius={74}
-                startAngle={90}
-                endAngle={450}
-                dataKey="value"
-                stroke="none"
-              >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="absolute inset-0 flex items-center justify-center">
+          <ReactECharts
+            option={option}
+            style={{ width: "160px", height: "160px" }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="flex flex-col items-center">
               <span className="text-xl font-bold">95gm</span>
               <span className="text-[8px] text-gray-400 uppercase tracking-wider font-bold">
