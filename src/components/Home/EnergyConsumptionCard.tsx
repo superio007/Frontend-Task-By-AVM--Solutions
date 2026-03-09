@@ -58,15 +58,15 @@ const EnergyConsumptionCard = () => {
       }}
       className="rounded-3xl p-5 flex flex-col h-90"
     >
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-2">
+      <div className="flex w-full justify-between items-center mb-2">
+        <div className="flex w-full items-center gap-2">
           <FontAwesomeIcon
             icon={faZap}
             className="text-[12px] text-white bg-gray-700 rounded-full p-1"
           />
           <h3 className="text-white font-medium text-sm">Energy Consumption</h3>
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex w-full justify-end items-center gap-1.5">
           <span className="bg-[#202020] text-[#E6EAF5] py-2  px-4 text-xs font-semibold rounded-full capitalize">
             Last 7 Day
           </span>

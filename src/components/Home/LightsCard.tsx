@@ -12,34 +12,51 @@ const LightsCard = () => {
   const centerX = 120;
   const centerY = 120;
 
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
   const percentage = (temperature - min) / (max - min);
   const angle = Math.PI * percentage;
 
   const knobX = centerX + radius * Math.cos(Math.PI - angle);
   const knobY = centerY - radius * Math.sin(Math.PI - angle);
 
-  const svgRef = useRef<SVGSVGElement | null>(null);
-
-  const handleDrag = (e: React.MouseEvent) => {
-    if (!svgRef.current || !isOn) return; // Don't allow dragging when lights are off
+  const updateTemperature = (clientX: number, clientY: number) => {
+    if (!svgRef.current || !isOn) return;
 
     const rect = svgRef.current.getBoundingClientRect();
 
-    const x = e.clientX - rect.left - centerX;
-    const y = e.clientY - rect.top - centerY;
+    const x = clientX - rect.left - centerX;
+    const y = clientY - rect.top - centerY;
 
     let angle = Math.atan2(-y, x);
-
     angle = Math.PI - angle;
 
     if (angle < 0) angle = 0;
     if (angle > Math.PI) angle = Math.PI;
 
     const percent = angle / Math.PI;
-
     const newTemp = Math.round(min + percent * (max - min));
 
     setTemperature(newTemp);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (e.buttons !== 1) return;
+    updateTemperature(e.clientX, e.clientY);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    updateTemperature(e.clientX, e.clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    updateTemperature(touch.clientX, touch.clientY);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    updateTemperature(touch.clientX, touch.clientY);
   };
 
   const ticks = [];
@@ -80,7 +97,7 @@ const LightsCard = () => {
       `,
         border: "1px solid transparent",
       }}
-      className="rounded-3xl p-5 flex flex-col h-90"
+      className="rounded-3xl p-5 flex flex-col min-h-[360px]"
     >
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-2">
@@ -107,9 +124,15 @@ const LightsCard = () => {
           width="240"
           height="140"
           viewBox="0 0 240 140"
-          onMouseMove={(e) => e.buttons === 1 && handleDrag(e)}
+          onMouseMove={handleMouseMove}
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           className={!isOn ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}
-          style={{ pointerEvents: isOn ? "auto" : "none" }}
+          style={{
+            pointerEvents: isOn ? "auto" : "none",
+            touchAction: "none",
+          }}
         >
           {ticks}
 
@@ -141,7 +164,9 @@ const LightsCard = () => {
         </svg>
 
         <div
-          className={`text-center -mt-12 transition-opacity ${!isOn ? "opacity-40" : ""}`}
+          className={`text-center -mt-12 transition-opacity ${
+            !isOn ? "opacity-40" : ""
+          }`}
         >
           <h2 className="text-4xl font-bold text-teal-400">{temperature}k</h2>
 
