@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Menu } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faX, faBars } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import Logo from "../../assets/ds-logo.svg";
 import Profileicon from "../../assets/Profile.avif";
@@ -12,7 +13,7 @@ const Navbar = () => {
 
   const baseClass = "group flex items-center gap-1 transition-colors";
   const activeClass = "text-[#2DD4BF] bg-[#2DD4BF]/30 rounded-xl py-1 px-2";
-  const inactiveClass = "text-gray-500 hover:text-white";
+  const inactiveClass = "text-black hover:text-white";
 
   // close on outside click
   useEffect(() => {
@@ -57,16 +58,14 @@ const Navbar = () => {
             onClick={() => setOpen(!open)}
           >
             {open ? (
-              <X
-                size={32}
-                color="#c30010"
-                className="bg-[#c30010]/10 p-1 rounded hover:opacity-90 cursor-pointer"
+              <FontAwesomeIcon
+                icon={faX}
+                className="text-[#c30010] bg-[#c30010]/10 p-1 rounded hover:opacity-90 cursor-pointer mb-4 text-[32px]"
               />
             ) : (
-              <Menu
-                size={32}
-                color="#2DD4BF"
-                className="bg-[#2DD4BF]/10 p-1 rounded hover:opacity-90 cursor-pointer"
+              <FontAwesomeIcon
+                icon={faBars}
+                className="text-[#2DD4BF] bg-[#2DD4BF]/10 p-1 rounded hover:opacity-90 cursor-pointer mb-4 text-[32px]"
               />
             )}
           </button>

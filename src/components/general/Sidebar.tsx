@@ -8,7 +8,7 @@ const Sidebar = () => {
     "group flex flex-col items-center gap-1 transition-all duration-300";
   const activeClass = "text-[#2DD4BF] ";
   const inactiveClass =
-    "text-gray-500 hover:text-white opacity-60 hover:opacity-100";
+    "text-[#E6EAF5] hover:text-white opacity-60 hover:opacity-100";
 
   return (
     <aside

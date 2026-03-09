@@ -1,8 +1,9 @@
 import Usersicon from "../../assets/users.png";
 import ReactECharts from "echarts-for-react";
+import type { Footfall } from "../../types/Homepage";
 
 const FootfallCard = () => {
-  const data = [
+  const data: Footfall[] = [
     { day: "M", value: 110 },
     { day: "T", value: 130 },
     { day: "W", value: 100 },
@@ -21,7 +22,7 @@ const FootfallCard = () => {
     },
     xAxis: {
       type: "category",
-      data: data.map((item) => item.day),
+      data: data.map((item: Footfall) => item.day),
       boundaryGap: false,
       axisLine: { show: false },
       axisTick: { show: false },
@@ -44,7 +45,7 @@ const FootfallCard = () => {
     series: [
       {
         type: "line",
-        data: data.map((item) => item.value),
+        data: data.map((item: Footfall) => item.value),
         smooth: true,
         lineStyle: {
           color: "#2DD4BF",
@@ -91,14 +92,14 @@ const FootfallCard = () => {
           <span className="bg-gray-700 rounded-[100%] p-1">
             <img src={Usersicon} alt="Usersicon" width={14} height={14} />
           </span>
-          <h3 className="text-gray-300 font-medium text-sm">Footfall</h3>
+          <h3 className="text-white font-medium text-sm">Footfall</h3>
         </div>
-        <span className="bg-[#202020] text-white py-2  px-4 text-xs font-semibold rounded-full capitalize">
+        <span className="bg-[#202020] text-[#E6EAF5] py-2  px-4 text-xs font-semibold rounded-full capitalize">
           Last 7 Day
         </span>
       </div>
       <div className="flex-1 relative mt-1 overflow-hidden">
-        <div className="absolute left-0 top-0 bottom-4 flex flex-col justify-between text-[9px] text-gray-500 font-bold w-6 z-10">
+        <div className="absolute left-0 top-0 bottom-4 flex flex-col justify-between text-[9px] text-[#E6EAF5] font-bold w-6 z-10">
           <span>150</span>
           <span>100</span>
           <span>50</span>
@@ -111,8 +112,8 @@ const FootfallCard = () => {
               style={{ width: "100%", height: "100%" }}
             />
           </div>
-          <div className="flex justify-between pt-2 text-[9px] text-gray-500 font-bold uppercase tracking-widest px-1">
-            {data.map((item, index) => (
+          <div className="flex justify-between pt-2 text-[9px] text-[#E6EAF5] font-bold uppercase tracking-widest px-1">
+            {data.map((item: Footfall, index: number) => (
               <span
                 key={index}
                 className={item.day === "Today" ? "text-brand" : ""}

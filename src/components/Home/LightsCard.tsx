@@ -48,7 +48,7 @@ const LightsCard = () => {
     const tickAngle = Math.PI - (Math.PI * i) / 40;
 
     const inner = radius + 20;
-    const outer = radius + 28;
+    const outer = radius + 30;
 
     const x1 = centerX + inner * Math.cos(tickAngle);
     const y1 = centerY - inner * Math.sin(tickAngle);
@@ -65,7 +65,7 @@ const LightsCard = () => {
         y1={y1}
         x2={x2}
         y2={y2}
-        stroke={active ? "#2DD4BF" : "#ffffff40"}
+        stroke={active ? "#2DD4BF" : "#d0d0d040"}
         strokeWidth="2"
       />,
     );
@@ -87,7 +87,7 @@ const LightsCard = () => {
           <span className="bg-gray-700 rounded-full p-1">
             <img src={Airicon} width={16} height={16} />
           </span>
-          <h3 className="text-gray-300 text-sm">Lights</h3>
+          <h3 className="text-white font-medium text-sm">Lights</h3>
         </div>
 
         <label className="relative inline-flex items-center cursor-pointer scale-75">
@@ -141,7 +141,7 @@ const LightsCard = () => {
         <div className="text-center -mt-12">
           <h2 className="text-4xl font-bold text-teal-400">{temperature}k</h2>
 
-          <div className="flex justify-between w-56 text-gray-400 text-xs mt-1">
+          <div className="flex justify-between w-56 text-white text-xs mt-1">
             <span>{min}k</span>
             <span>{max}k</span>
           </div>
