@@ -1,24 +1,45 @@
 import { NavLink } from "react-router-dom";
+import HomeIcon from "../../assets/nav-icons/home.svg";
+import AnalyseIcon from "../../assets/nav-icons/pie.svg";
+import ControlIcon from "../../assets/nav-icons/tiles.svg";
 
 const Sidebar = () => {
-  const baseClass = "group flex flex-col items-center gap-1 transition-colors";
-  const activeClass = "text-[#2DD4BF] bg-[#2DD4BF]/30 rounded-xl py-1 px-2";
-  const inactiveClass = "text-gray-500 hover:text-white";
+  const baseClass =
+    "group flex flex-col items-center gap-1 transition-all duration-300";
+  const activeClass = "text-[#2DD4BF] ";
+  const inactiveClass =
+    "text-gray-500 hover:text-white opacity-60 hover:opacity-100";
 
   return (
-    <aside className="w-20 bg-sidebarBg/50 hidden md:flex flex-col items-center py-6 gap-8 border-r border-white/5 shrink-0">
+    <aside
+      style={{
+        background: `linear-gradient(
+          180deg, 
+          #ffffff14 0%, 
+          rgba(255, 255, 255, 0.02) 40%, 
+          rgba(0, 0, 0, 0.15) 100%
+        )`,
+      }}
+      className="w-24 hidden md:flex flex-col justify-center items-center py-8 gap-10 shrink-0 
+      m-4 rounded-3xl  
+      backdrop-blur-xl border border-white/10 shadow-2xl"
+    >
       <NavLink
         to="/"
         className={({ isActive }) =>
           `${baseClass} ${isActive ? activeClass : inactiveClass}`
         }
       >
-        <div className="p-2 rounded-xl bg-brand/10">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
-          </svg>
+        <div className="p-2 transition-transform group-hover:scale-110">
+          <img
+            src={HomeIcon}
+            alt="Home"
+            width={28}
+            height={28}
+            className="brightness-110"
+          />
         </div>
-        <span className="text-[10px] font-medium uppercase tracking-wider">
+        <span className="text-[10px] font-semibold uppercase tracking-widest">
           Home
         </span>
       </NavLink>
@@ -29,12 +50,10 @@ const Sidebar = () => {
           `${baseClass} ${isActive ? activeClass : inactiveClass}`
         }
       >
-        <div className="p-2 rounded-xl">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
-          </svg>
+        <div className="p-2 transition-transform group-hover:scale-110">
+          <img src={AnalyseIcon} alt="Analyse" width={28} height={28} />
         </div>
-        <span className="text-[10px] font-medium uppercase tracking-wider">
+        <span className="text-[10px] font-semibold uppercase tracking-widest">
           Analyse
         </span>
       </NavLink>
@@ -45,12 +64,10 @@ const Sidebar = () => {
           `${baseClass} ${isActive ? activeClass : inactiveClass}`
         }
       >
-        <div className="p-2 rounded-xl">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"></path>
-          </svg>
+        <div className="p-2 transition-transform group-hover:scale-110">
+          <img src={ControlIcon} alt="Control" width={28} height={28} />
         </div>
-        <span className="text-[10px] font-medium uppercase tracking-wider">
+        <span className="text-[10px] font-semibold uppercase tracking-widest">
           Control
         </span>
       </NavLink>

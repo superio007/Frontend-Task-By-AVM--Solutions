@@ -46,20 +46,22 @@ const EnergyConsumptionCard = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col h-90 border border-white/8">
+    <div className="bg-linear-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col h-90 border border-white/8">
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
-          <Zap className="w-4 h-4 text-gray-400" fill="currentColor" />
+          <span className="bg-gray-700 rounded-[100%] p-1">
+            <Zap className="w-4 h-4 text-white" fill="currentColor" />
+          </span>
           <h3 className="text-gray-300 font-medium text-sm">
             Energy Consumption
           </h3>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="text-[9px] bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-gray-400 uppercase tracking-widest">
+          <span className="bg-[#202020] text-white py-2  px-4 text-xs font-semibold rounded-full capitalize">
             Last 7 Day
           </span>
-          <button className="text-gray-500 hover:text-white transition-colors">
-            <MoreVertical className="w-4 h-4" />
+          <button className="text-gray-500 bg-[#202020] p-2 rounded-full hover:text-white transition-colors">
+            <MoreVertical className="w-4 h-4" color="#fff" />
           </button>
         </div>
       </div>

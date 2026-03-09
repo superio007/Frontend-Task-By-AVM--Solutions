@@ -1,4 +1,4 @@
-import { User } from "lucide-react";
+import Usersicon from "../../assets/users.png";
 import ReactECharts from "echarts-for-react";
 
 const FootfallCard = () => {
@@ -79,10 +79,12 @@ const FootfallCard = () => {
     <div className="bg-linear-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col lg:col-span-2 h-90 border border-white/8">
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
-          <User className="w-4 h-4 text-gray-400" />
+          <span className="bg-gray-700 rounded-[100%] p-1">
+            <img src={Usersicon} alt="Usersicon" width={14} height={14} />
+          </span>
           <h3 className="text-gray-300 font-medium text-sm">Footfall</h3>
         </div>
-        <span className="text-[9px] bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-gray-400 uppercase tracking-widest">
+        <span className="bg-[#202020] text-white py-2  px-4 text-xs font-semibold rounded-full capitalize">
           Last 7 Day
         </span>
       </div>

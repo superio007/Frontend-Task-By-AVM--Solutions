@@ -1,4 +1,4 @@
-import { Globe } from "lucide-react";
+import Airicon from "../../assets/air.png";
 import ReactECharts from "echarts-for-react";
 
 const CarbonIntensityCard = () => {
@@ -22,9 +22,9 @@ const CarbonIntensityCard = () => {
           name: item.name,
           itemStyle: { color: item.color },
         })),
-        label: { show: false },
+        label: true,
         emphasis: {
-          scale: false,
+          scale: true,
         },
       },
     ],
@@ -34,12 +34,14 @@ const CarbonIntensityCard = () => {
     <div className="bg-linear-to-b from-cardBg/80 to-cardBg rounded-3xl p-5 flex flex-col h-90 border border-white/8">
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-2">
-          <Globe className="w-4 h-4 text-gray-400" />
+          <span className="bg-gray-700 rounded-[100%] p-1">
+            <img src={Airicon} alt="Airicon" width={16} height={16} />
+          </span>
           <h3 className="text-gray-300 font-medium text-sm">
             Carbon Intensity
           </h3>
         </div>
-        <span className="text-[9px] bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-gray-400 uppercase tracking-widest">
+        <span className="bg-[#202020] text-white py-2  px-4 text-xs font-semibold rounded-full capitalize">
           Current
         </span>
       </div>
@@ -47,7 +49,7 @@ const CarbonIntensityCard = () => {
         <div className="relative w-40 h-40 flex items-center justify-center shrink-0">
           <ReactECharts
             option={option}
-            style={{ width: "160px", height: "160px" }}
+            style={{ width: "180px", height: "180px" }}
           />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div className="flex flex-col items-center">
