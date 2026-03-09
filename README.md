@@ -8,7 +8,7 @@ A modern, interactive dashboard built with React, TypeScript, and Tailwind CSS, 
 
 ## 📸 Screenshots
 
-![Design Reference](./src/assets/Frontend-Test.jpg)
+![Design Reference](./public/frontend-task-by-avm-solutions.vercel.app_.png)
 
 ## 🛠️ Tech Stack
 
@@ -34,10 +34,10 @@ A modern, interactive dashboard built with React, TypeScript, and Tailwind CSS, 
 
 ```bash
 # Clone the repository
-git clone [your-repo-url]
+git clone https://github.com/superio007/Frontend-Task-By-AVM--Solutions.git
 
 # Navigate to project directory
-cd frontend-task-by-global-pinacle
+cd Frontend-Task-By-AVM--Solutions
 
 # Install dependencies
 npm install
@@ -155,7 +155,7 @@ The application includes:
 ## 🔗 Links
 
 - **LinkedIn Profile**: [Kiran Dhoke](https://www.linkedin.com/in/kiran-dhoke)
-- **DigiSpace Product**: [www.digispace.app](https://www.digispace.app/)
+- **Deployed Link**: [Live Link](https://frontend-task-by-avm-solutions.vercel.app/)
 
 ## 🚀 Future Enhancements
 
