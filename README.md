@@ -1,21 +1,14 @@
-# DigiSpace Dashboard – Frontend Developer Task
+# Frontend Developer Task - DigiSpace Dashboard
 
-This project is a dashboard UI built as part of a Frontend Developer assessment.  
-The goal was to reproduce the provided design as closely as possible using React and modern frontend tooling.
+A modern, interactive dashboard built with React, TypeScript, and Tailwind CSS, featuring real-time data visualization for energy consumption, carbon intensity, footfall, and environmental controls.
 
----
+## 🚀 Live Demo
 
-## Live Demo
+[Add your hosted link here]
 
-https://frontend-task-by-avm-solutions.vercel.app/
+## 📸 Screenshots
 
----
-
-## Screenshot
-
-![Dashboard Preview](./public/frontend-task-by-avm-solutions.vercel.app_.png)
-
----
+![Design Reference](./public/frontend-task-by-avm-solutions.vercel.app_.png)
 
 ## Tech Stack
 
