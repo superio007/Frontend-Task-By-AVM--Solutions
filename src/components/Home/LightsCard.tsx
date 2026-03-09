@@ -21,7 +21,7 @@ const LightsCard = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   const handleDrag = (e: React.MouseEvent) => {
-    if (!svgRef.current) return;
+    if (!svgRef.current || !isOn) return; // Don't allow dragging when lights are off
 
     const rect = svgRef.current.getBoundingClientRect();
 
@@ -108,6 +108,8 @@ const LightsCard = () => {
           height="140"
           viewBox="0 0 240 140"
           onMouseMove={(e) => e.buttons === 1 && handleDrag(e)}
+          className={!isOn ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}
+          style={{ pointerEvents: isOn ? "auto" : "none" }}
         >
           {ticks}
 
@@ -132,13 +134,15 @@ const LightsCard = () => {
             cx={knobX}
             cy={knobY}
             r="10"
-            fill="#2DD4BF"
+            fill={isOn ? "#2DD4BF" : "#6B7280"}
             stroke="white"
             strokeWidth="3"
           />
         </svg>
 
-        <div className="text-center -mt-12">
+        <div
+          className={`text-center -mt-12 transition-opacity ${!isOn ? "opacity-40" : ""}`}
+        >
           <h2 className="text-4xl font-bold text-teal-400">{temperature}k</h2>
 
           <div className="flex justify-between w-56 text-white text-xs mt-1">

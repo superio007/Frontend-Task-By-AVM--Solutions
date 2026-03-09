@@ -18,7 +18,7 @@ A modern, interactive dashboard built with React, TypeScript, and Tailwind CSS, 
 - **Tailwind CSS 4.2.1** - Utility-first CSS framework
 - **React Router DOM** - Client-side routing
 - **Apache ECharts** - Data visualization library
-- **Lucide React** - Icon library
+- **Font Awesome** - Icon library
 
 ## ✨ Features
 
