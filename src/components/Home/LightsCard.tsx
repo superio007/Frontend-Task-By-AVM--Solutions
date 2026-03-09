@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback, useMemo } from "react";
 import Airicon from "../../assets/air.png";
 
 const LightsCard = () => {
@@ -20,73 +20,77 @@ const LightsCard = () => {
   const knobX = centerX + radius * Math.cos(Math.PI - angle);
   const knobY = centerY - radius * Math.sin(Math.PI - angle);
 
-  const updateTemperature = (clientX: number, clientY: number) => {
-    if (!svgRef.current || !isOn) return;
+  const updateTemperature = useCallback(
+    (clientX: number, clientY: number) => {
+      if (!svgRef.current || !isOn) return;
 
-    const rect = svgRef.current.getBoundingClientRect();
+      const rect = svgRef.current.getBoundingClientRect();
 
-    const x = clientX - rect.left - centerX;
-    const y = clientY - rect.top - centerY;
+      const x = clientX - rect.left - centerX;
+      const y = clientY - rect.top - centerY;
 
-    let angle = Math.atan2(-y, x);
-    angle = Math.PI - angle;
+      let angle = Math.atan2(-y, x);
+      angle = Math.PI - angle;
 
-    if (angle < 0) angle = 0;
-    if (angle > Math.PI) angle = Math.PI;
+      if (angle < 0) angle = 0;
+      if (angle > Math.PI) angle = Math.PI;
 
-    const percent = angle / Math.PI;
-    const newTemp = Math.round(min + percent * (max - min));
+      const percent = angle / Math.PI;
+      const newTemp = Math.round(min + percent * (max - min));
 
-    setTemperature(newTemp);
-  };
+      setTemperature(newTemp);
+    },
+    [isOn, min, max],
+  );
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (e.buttons !== 1) return;
-    updateTemperature(e.clientX, e.clientY);
-  };
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      e.currentTarget.setPointerCapture(e.pointerId);
+      updateTemperature(e.clientX, e.clientY);
+    },
+    [updateTemperature],
+  );
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    updateTemperature(e.clientX, e.clientY);
-  };
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (e.buttons !== 1) return;
+      updateTemperature(e.clientX, e.clientY);
+    },
+    [updateTemperature],
+  );
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    updateTemperature(touch.clientX, touch.clientY);
-  };
+  const ticks = useMemo(() => {
+    const tickArray = [];
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    updateTemperature(touch.clientX, touch.clientY);
-  };
+    for (let i = 0; i <= 40; i++) {
+      const tickAngle = Math.PI - (Math.PI * i) / 40;
 
-  const ticks = [];
+      const inner = radius + 20;
+      const outer = radius + 30;
 
-  for (let i = 0; i <= 40; i++) {
-    const tickAngle = Math.PI - (Math.PI * i) / 40;
+      const x1 = centerX + inner * Math.cos(tickAngle);
+      const y1 = centerY - inner * Math.sin(tickAngle);
 
-    const inner = radius + 20;
-    const outer = radius + 30;
+      const x2 = centerX + outer * Math.cos(tickAngle);
+      const y2 = centerY - outer * Math.sin(tickAngle);
 
-    const x1 = centerX + inner * Math.cos(tickAngle);
-    const y1 = centerY - inner * Math.sin(tickAngle);
+      const active = i / 40 <= percentage;
 
-    const x2 = centerX + outer * Math.cos(tickAngle);
-    const y2 = centerY - outer * Math.sin(tickAngle);
+      tickArray.push(
+        <line
+          key={i}
+          x1={x1}
+          y1={y1}
+          x2={x2}
+          y2={y2}
+          stroke={active ? "#2DD4BF" : "#d0d0d040"}
+          strokeWidth="2"
+        />,
+      );
+    }
 
-    const active = i / 40 <= percentage;
-
-    ticks.push(
-      <line
-        key={i}
-        x1={x1}
-        y1={y1}
-        x2={x2}
-        y2={y2}
-        stroke={active ? "#2DD4BF" : "#d0d0d040"}
-        strokeWidth="2"
-      />,
-    );
-  }
+    return tickArray;
+  }, [percentage, radius, centerX, centerY]);
 
   return (
     <div
@@ -97,7 +101,7 @@ const LightsCard = () => {
       `,
         border: "1px solid transparent",
       }}
-      className="rounded-3xl p-5 flex flex-col min-h-[360px]"
+      className="rounded-3xl p-5 flex flex-col min-h-90"
     >
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-2">
@@ -124,14 +128,13 @@ const LightsCard = () => {
           width="240"
           height="140"
           viewBox="0 0 240 140"
-          onMouseMove={handleMouseMove}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
           className={!isOn ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}
           style={{
             pointerEvents: isOn ? "auto" : "none",
             touchAction: "none",
+            userSelect: "none",
           }}
         >
           {ticks}
@@ -150,7 +153,9 @@ const LightsCard = () => {
             stroke="#2DD4BF"
             strokeWidth="14"
             strokeLinecap="round"
-            strokeDasharray={`${Math.PI * radius * percentage} ${Math.PI * radius}`}
+            strokeDasharray={`${Math.PI * radius * percentage} ${
+              Math.PI * radius
+            }`}
           />
 
           <circle

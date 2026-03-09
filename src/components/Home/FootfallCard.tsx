@@ -1,80 +1,75 @@
 import Usersicon from "../../assets/users.png";
 import ReactECharts from "echarts-for-react";
+import { FootfallData } from "../../constants/FootfallData";
 import type { Footfall } from "../../types/Homepage";
+import { useMemo } from "react";
 
 const FootfallCard = () => {
-  const data: Footfall[] = [
-    { day: "M", value: 110 },
-    { day: "T", value: 130 },
-    { day: "W", value: 100 },
-    { day: "T", value: 90 },
-    { day: "F", value: 80 },
-    { day: "S", value: 120 },
-    { day: "Today", value: 120 },
-  ];
-
-  const option = {
-    grid: {
-      top: 20,
-      right: 20,
-      bottom: 10,
-      left: 10,
-    },
-    xAxis: {
-      type: "category",
-      data: data.map((item: Footfall) => item.day),
-      boundaryGap: false,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: { show: false },
-    },
-    yAxis: {
-      type: "value",
-      min: 0,
-      max: 150,
-      splitLine: {
-        show: true,
-        lineStyle: {
-          color: "rgba(255, 255, 255, 0.05)",
-        },
+  const option = useMemo(
+    () => ({
+      grid: {
+        top: 20,
+        right: 20,
+        bottom: 10,
+        left: 10,
       },
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: { show: false },
-    },
-    series: [
-      {
-        type: "line",
-        data: data.map((item: Footfall) => item.value),
-        smooth: true,
-        lineStyle: {
-          color: "#2DD4BF",
-          width: 2.5,
-        },
-        areaStyle: {
-          color: {
-            type: "linear",
-            x: 0,
-            y: 0,
-            x2: 0,
-            y2: 1,
-            colorStops: [
-              { offset: 0, color: "rgba(45, 212, 191, 0.25)" },
-              { offset: 1, color: "rgba(45, 212, 191, 0)" },
-            ],
+      xAxis: {
+        type: "category",
+        data: FootfallData.map((item: Footfall) => item.day),
+        boundaryGap: false,
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { show: false },
+      },
+      yAxis: {
+        type: "value",
+        min: 0,
+        max: 150,
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: "rgba(255, 255, 255, 0.05)",
           },
         },
-        symbol: "none",
-        emphasis: {
-          itemStyle: {
-            color: "white",
-            borderColor: "#2DD4BF",
-            borderWidth: 2,
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { show: false },
+      },
+      series: [
+        {
+          type: "line",
+          data: FootfallData.map((item: Footfall) => item.value),
+          smooth: true,
+          lineStyle: {
+            color: "#2DD4BF",
+            width: 2.5,
+          },
+          areaStyle: {
+            color: {
+              type: "linear",
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                { offset: 0, color: "rgba(45, 212, 191, 0.25)" },
+                { offset: 1, color: "rgba(45, 212, 191, 0)" },
+              ],
+            },
+          },
+          symbol: "none",
+          emphasis: {
+            itemStyle: {
+              color: "white",
+              borderColor: "#2DD4BF",
+              borderWidth: 2,
+            },
           },
         },
-      },
-    ],
-  };
+      ],
+    }),
+    [FootfallData],
+  );
 
   return (
     <div
@@ -109,11 +104,13 @@ const FootfallCard = () => {
           <div className="flex-1 relative">
             <ReactECharts
               option={option}
+              notMerge
+              lazyUpdate
               style={{ width: "100%", height: "100%" }}
             />
           </div>
           <div className="flex justify-between pt-2 text-[9px] text-[#E6EAF5] font-bold uppercase tracking-widest px-1">
-            {data.map((item: Footfall, index: number) => (
+            {FootfallData.map((item: Footfall, index: number) => (
               <span
                 key={index}
                 className={item.day === "Today" ? "text-brand" : ""}

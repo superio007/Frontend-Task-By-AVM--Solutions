@@ -1,35 +1,32 @@
 import Airicon from "../../assets/air.png";
 import ReactECharts from "echarts-for-react";
 import type { CarbonIntensity } from "../../types/Homepage";
+import { CarbonIntensityData } from "../../constants/CarbonIntensityData";
+import { useMemo } from "react";
 
 const CarbonIntensityCard = () => {
-  const data: CarbonIntensity[] = [
-    { name: "Coal", value: 30, color: "#F87171" },
-    { name: "Hydro", value: 20, color: "#FBBF24" },
-    { name: "Nuclear", value: 20, color: "#A78BFA" },
-    { name: "Wind", value: 15, color: "#22D3EE" },
-    { name: "Solar", value: 15, color: "#2DD4BF" },
-  ];
-
-  const option = {
-    series: [
-      {
-        type: "pie",
-        radius: ["60%", "80%"],
-        center: ["50%", "50%"],
-        startAngle: 90,
-        data: data.map((item: CarbonIntensity) => ({
-          value: item.value,
-          name: item.name,
-          itemStyle: { color: item.color },
-        })),
-        label: { show: false },
-        emphasis: {
-          scale: true,
+  const option = useMemo(
+    () => ({
+      series: [
+        {
+          type: "pie",
+          radius: ["60%", "80%"],
+          center: ["50%", "50%"],
+          startAngle: 90,
+          data: CarbonIntensityData.map((item: CarbonIntensity) => ({
+            value: item.value,
+            name: item.name,
+            itemStyle: { color: item.color },
+          })),
+          label: { show: false },
+          emphasis: {
+            scale: true,
+          },
         },
-      },
-    ],
-  };
+      ],
+    }),
+    [CarbonIntensityData],
+  );
 
   return (
     <div
@@ -57,6 +54,8 @@ const CarbonIntensityCard = () => {
         <div className="relative w-52 h-52 flex items-center justify-center shrink-0">
           <ReactECharts
             option={option}
+            notMerge
+            lazyUpdate
             style={{ width: "100%", height: "100%" }}
           />
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -69,7 +68,7 @@ const CarbonIntensityCard = () => {
           </div>
         </div>
         <div className="flex flex-col gap-1.5 py-2">
-          {data.map((item: CarbonIntensity) => (
+          {CarbonIntensityData.map((item: CarbonIntensity) => (
             <div
               key={item.name}
               className="flex items-center gap-2 text-[10px] font-bold"

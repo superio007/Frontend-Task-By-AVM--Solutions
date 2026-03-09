@@ -1,6 +1,16 @@
 const FallbackLoader = () => {
   return (
-    <div className="h-screen w-full bg-gray-200">
+    <div
+      className="h-screen w-full rounded-3xl"
+      style={{
+        background: `linear-gradient(
+          135deg, 
+          #163031 0%, 
+          #0C0D0F 40%, 
+          #192e29 100%
+        )`,
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -16,8 +26,8 @@ const FallbackLoader = () => {
           height="100"
         >
           <circle
-            fill="#1b68ea"
-            stroke="#1b68ea"
+            fill="#2DD4BF"
+            stroke="#2DD4BF"
             strokeWidth="15"
             r="15"
             cx="40"
@@ -35,8 +45,8 @@ const FallbackLoader = () => {
           </circle>
 
           <circle
-            fill="#1b68ea"
-            stroke="#1b68ea"
+            fill="#2DD4BF"
+            stroke="#2DD4BF"
             strokeWidth="15"
             r="15"
             cx="100"
@@ -54,8 +64,8 @@ const FallbackLoader = () => {
           </circle>
 
           <circle
-            fill="#1b68ea"
-            stroke="#1b68ea"
+            fill="#2DD4BF"
+            stroke="#2DD4BF"
             strokeWidth="15"
             r="15"
             cx="160"

@@ -11,7 +11,7 @@ const Navbar = () => {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const baseClass = "group flex items-center gap-1 transition-colors";
+  const baseClass = "group flex items-center gap-2 transition-colors";
   const activeClass = "text-[#2DD4BF] bg-[#2DD4BF]/30 rounded-xl py-1 px-2";
   const inactiveClass = "text-black hover:text-white";
 
@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="flex items-center justify-between p-6 z-20 shrink-0 relative">
+      <header className="flex items-center justify-between pl-6 pr-2 py-6 z-20 shrink-0 relative">
         <div className="flex items-center gap-2">
           <div className="flex items-center text-brand text-2xl font-bold tracking-tight">
             <img src={Logo} alt="Logo" width={150} height={150} />

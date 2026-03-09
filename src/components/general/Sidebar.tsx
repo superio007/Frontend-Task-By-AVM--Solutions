@@ -5,7 +5,7 @@ import ControlIcon from "../../assets/nav-icons/tiles.svg";
 
 const Sidebar = () => {
   const baseClass =
-    "group flex flex-col items-center gap-1 transition-all duration-300";
+    "group flex flex-col items-center gap-2 transition-all duration-300";
   const activeClass = "text-[#2DD4BF] ";
   const inactiveClass =
     "text-[#E6EAF5] hover:text-white opacity-60 hover:opacity-100";
@@ -30,7 +30,7 @@ const Sidebar = () => {
           `${baseClass} ${isActive ? activeClass : inactiveClass}`
         }
       >
-        <div className="p-2 transition-transform group-hover:scale-110">
+        <div className="flex items-center justify-center h-8 transition-transform group-hover:scale-110">
           <img
             src={HomeIcon}
             alt="Home"
@@ -50,7 +50,7 @@ const Sidebar = () => {
           `${baseClass} ${isActive ? activeClass : inactiveClass}`
         }
       >
-        <div className="p-2 transition-transform group-hover:scale-110">
+        <div className="flex items-center justify-center h-8 transition-transform group-hover:scale-110">
           <img src={AnalyseIcon} alt="Analyse" width={28} height={28} />
         </div>
         <span className="text-[10px] font-semibold uppercase tracking-widest">
@@ -64,7 +64,7 @@ const Sidebar = () => {
           `${baseClass} ${isActive ? activeClass : inactiveClass}`
         }
       >
-        <div className="p-2 transition-transform group-hover:scale-110">
+        <div className="flex items-center justify-center h-8 transition-transform group-hover:scale-110">
           <img src={ControlIcon} alt="Control" width={28} height={28} />
         </div>
         <span className="text-[10px] font-semibold uppercase tracking-widest">

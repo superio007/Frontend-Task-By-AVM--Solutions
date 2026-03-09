@@ -2,50 +2,44 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faZap, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import ReactECharts from "echarts-for-react";
 import type { EnergyConsumption } from "../../types/Homepage";
-
+import { useMemo } from "react";
+import { Energydata } from "../../constants/energyData";
 const EnergyConsumptionCard = () => {
-  const data: EnergyConsumption[] = [
-    { day: "M", value: 40, opacity: 0.6 },
-    { day: "T", value: 75, opacity: 0.9 },
-    { day: "W", value: 30, opacity: 0.5 },
-    { day: "T", value: 95, opacity: 1 },
-    { day: "F", value: 70, opacity: 0.8 },
-    { day: "S", value: 35, opacity: 0.4 },
-    { day: "TODAY", value: 55, opacity: 1, isToday: true },
-  ];
-
-  const option = {
-    grid: {
-      top: 10,
-      right: 10,
-      bottom: 30,
-      left: 10,
-    },
-    xAxis: {
-      type: "category",
-      data: data.map((item: EnergyConsumption) => item.day),
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: { show: false },
-    },
-    yAxis: {
-      type: "value",
-      show: false,
-    },
-    series: [
-      {
-        type: "bar",
-        data: data.map((item: EnergyConsumption) => ({
-          value: item.value,
-          itemStyle: {
-            color: `rgba(45, 212, 191, ${item.opacity})`,
-            borderRadius: [4, 4, 0, 0],
-          },
-        })),
-        barWidth: "60%",
+  const option = useMemo(
+    () => ({
+      grid: {
+        top: 10,
+        right: 10,
+        bottom: 30,
+        left: 10,
       },
-    ],
-  };
+      xAxis: {
+        type: "category",
+        data: Energydata.map((item: EnergyConsumption) => item.day),
+        axisLine: { show: false },
+        axisTick: { show: false },
+        axisLabel: { show: false },
+      },
+      yAxis: {
+        type: "value",
+        show: false,
+      },
+      series: [
+        {
+          type: "bar",
+          data: Energydata.map((item: EnergyConsumption) => ({
+            value: item.value,
+            itemStyle: {
+              color: `rgba(45, 212, 191, ${item.opacity})`,
+              borderRadius: [4, 4, 0, 0],
+            },
+          })),
+          barWidth: "60%",
+        },
+      ],
+    }),
+    [Energydata],
+  );
 
   return (
     <div
@@ -81,10 +75,12 @@ const EnergyConsumptionCard = () => {
       <div className="flex-1 flex flex-col mt-2">
         <ReactECharts
           option={option}
+          notMerge={true}
+          lazyUpdate={true}
           style={{ width: "100%", height: "100%" }}
         />
         <div className="flex justify-between px-1 text-[9px] font-bold -mt-4">
-          {data.map((item: EnergyConsumption, index: number) => (
+          {Energydata.map((item: EnergyConsumption, index: number) => (
             <span
               key={index}
               className={item.isToday ? "text-white" : "text-[#E6EAF5]"}
